@@ -1,3 +1,3 @@
 # Project-AlPRo-Lanjut-IFB-24
-PROJECT ALPRO
+PROJECT ALPRO.
 Cepat selesai, cepat memperbaiki juga
