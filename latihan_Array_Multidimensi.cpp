@@ -29,4 +29,5 @@ int main(){
     cout<<dia_prim<<endl;
     cout<<dia_sen<<endl;
     cout<<"AKHIR";
+  
 }
