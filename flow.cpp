@@ -2,11 +2,28 @@
 #include <string>
 using namespace std;
 
+//Struct untuk unit apartemen
+struct unit {
+    
+};
+
+//struct untuk banyak akun penyewa
+struct akun_penyewa{
+    int ID;
+    string username;
+    string password;
+    string email;
+}; 
+akun_penyewa penyewa[1001];
+int akun=0;
+
+//Data Akun 
 void loginMenu();
 void signUpMenu();
 void adminMenu();
 void penyewaMenu();
 void signInPenyewa(); 
+//Data Apartemen
 void tampilkanDataApartemen(); 
 void sewaUnit(); 
 void hitungTotalPendapatan();
@@ -14,11 +31,14 @@ void kelolaDataApartemen();
 void tambahDataApartemen(); 
 void hapusDataApartemen(); 
 void ubahStatusApartemen();
+
+
 int main() {
     loginMenu();
     return 0;
 }
 
+//Menu Awal
 void loginMenu() {
     system("cls");
     int pilihan;
@@ -47,17 +67,33 @@ void loginMenu() {
     }
 }
 
+//Membuat Akun Penyewa
 void signUpMenu() {
     system("cls");
-
+    akun++;
     cout << "=== MENU SIGN UP ===" << endl;
-    cout << "Fitur sign up belum diimplementasikan." << endl;
-    cout << "Kembali ke menu login..." << endl;
-    loginMenu();
+    for(int i=akun;i<=akun;i++){
+        penyewa[i].ID=i;
+        cout<<"Masukkan email: ";
+        cin>>penyewa[i].email;
+        cout<<"Masukkan Username: ";
+        cin>>penyewa[i].username;
+        cout<<"Masukkan password: ";
+        cin>>penyewa[i].password;
+    }
+    cout << "Akun telah selesai dibuat." << endl;
+    cout << "Masuk ke sign-in..." << endl;
+    getchar();
+    signInPenyewa();
 }
-
+//Login Penyewa
 void signInPenyewa() {
     int pilihan;
+    char yes_or_no;
+    string username_penyewa;
+    string password_penyewa;
+    bool check_username=false;
+    bool check_password=false;
     system("cls");
 
     cout << "=== LOGIN PENYEWA ===" << endl;
@@ -69,8 +105,45 @@ void signInPenyewa() {
 
     switch (pilihan) {
         case 1:
-            cout << "Fitur sign in penyewa belum diimplementasikan." << endl;
-            penyewaMenu(); 
+            cout<<"Masukkan Username: ";
+            cin>>username_penyewa;
+            cout<<"Masukkan Password: ";
+            cin>>password_penyewa;
+            
+            for(int i=1;i<=akun;i++){
+                if(username_penyewa==penyewa[i].username){//check username
+                    check_username=true;
+                }
+                if(password_penyewa==penyewa[i].password){
+                    check_password=true;
+                }
+            }
+            if (check_username==true&&check_password==true){
+                cout<<"Login berhasil"<<endl;
+                cout<<"Tekan enter untuk melanjutkan...";
+                cin.ignore();
+                getchar();
+                penyewaMenu();
+            }
+            else{
+                cout<<"Username atau Password ada yang salah"<<endl;
+                cout<<"Apakah Anda benar-benar sudah punya akun? (y/n): ";
+                cin>>yes_or_no;
+                if(yes_or_no=='y'||yes_or_no=='Y') signInPenyewa();
+                else if(yes_or_no=='N'||yes_or_no=='n'){
+                    cout<<"Tolong buat akun terlebih dahulu."<<endl;
+                    cin.ignore();
+                    cout<<"Tekan enter untuk melanjutkan...";
+                    getchar();
+                    signUpMenu();
+                }
+                else {
+                    cout<<"Input tidak ada yang sesuai."<<endl;
+                    cout<<"Maka akan dilempar ke menu awal."<<endl;
+                    loginMenu();
+                }
+            }
+                 
             break;
         case 2:
             signUpMenu();
