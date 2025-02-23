@@ -1,10 +1,19 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
+
+// KUMPULAN STRUCT MASUKIN SINI
 //Struct untuk unit apartemen
 struct unit {
-    
+    string ID;
+    string nama;
+    string tipe;
+    string lokasi;
+    string fasilitas;
+    int hargaPerBulan;
+    bool statusTersedia=true;
 };
 
 //struct untuk banyak akun penyewa
@@ -14,9 +23,19 @@ struct akun_penyewa{
     string password;
     string email;
 }; 
-akun_penyewa penyewa[1001];
+
+// KUMPULAN DATA (UNIT, AKUN, ADMIN, ETC) MASUKIN SINI
+// data unit
+unit data_unit[301]; 
+int jumlahUnit = 3;
+
+
+// data akun penyewa
+akun_penyewa penyewa[1001];  
 int akun=0;
 
+
+bool cariUnit(int index,string& pilihID_unit);
 //Data Akun 
 void loginMenu();
 void signUpMenu();
@@ -24,6 +43,7 @@ void adminMenu();
 void penyewaMenu();
 void signInPenyewa(); 
 //Data Apartemen
+void tampilkanSemuaDataApartemen();
 void tampilkanDataApartemen(); 
 void sewaUnit(); 
 void hitungTotalPendapatan();
@@ -269,9 +289,66 @@ void tampilkanDataApartemen() {
 }
 
 void sewaUnit() {
-    
+    system("cls");
+    data_unit[1].ID="1";
+    string pilihID_unit;
+    tampilkanSemuaDataApartemen();
+
+    cout << "Pilih ID unit yang ingin disewa: ";
+    cin >> pilihID_unit;
+    system("cls");
+
+    if(cariUnit(1, pilihID_unit) == false) {
+        
+        cout << "Unit dengan ID: " << pilihID_unit << " tidak tersedia.\nSilahkan pilih yang lain.\n";
+        system("pause");
+        sewaUnit(); 
+    }
 }
 
 void hitungTotalPendapatan() {
     
+}
+
+void tampilkanSemuaDataApartemen(){
+    int IDlenght=6, namaLenght=20, tipeLenght=10, hargaLenght=20, tersediaLenght=13;
+    for (int i=1; i <=jumlahUnit; i++) {
+        if (i==1){
+            cout <<"==================================================================================" << endl;
+            cout << left << "|| " << setw(IDlenght) << "ID" << "| " << setw(namaLenght) << "nama" << "| " << setw(tipeLenght) << "tipe"  << "| " << setw(hargaLenght) << "harga/bulan"  << "| " << setw(tersediaLenght) << "tersedia"  << "||" << endl;
+            cout <<"==================================================================================" << endl;
+            cout << left << "|| " << setw(IDlenght) << data_unit[i].ID << "| " << setw(namaLenght) << data_unit[i].nama << "| " << setw(tipeLenght) << data_unit[i].tipe  << "| " << setw(hargaLenght) << data_unit[i].hargaPerBulan  << "| " << setw(tersediaLenght) << data_unit[i].statusTersedia  << "||" << endl;
+        } else if (i==jumlahUnit) {
+            cout << left << "|| " << setw(IDlenght) << data_unit[i].ID << "| " << setw(namaLenght) << data_unit[i].nama << "| " << setw(tipeLenght) << data_unit[i].tipe  << "| " << setw(hargaLenght) << data_unit[i].hargaPerBulan  << "| " << setw(tersediaLenght) << data_unit[i].statusTersedia  << "||" << endl;
+            cout <<"==================================================================================" << endl;
+
+        } 
+        else {
+            cout << left << "|| " << setw(IDlenght) << data_unit[i].ID << "| " << setw(namaLenght) << data_unit[i].nama << "| " << setw(tipeLenght) << data_unit[i].tipe  << "| " << setw(hargaLenght) << data_unit[i].hargaPerBulan  << "| " << setw(tersediaLenght) << data_unit[i].statusTersedia  << "||" << endl;
+        }
+    }
+}
+
+bool cariUnit(int index, string& pilihID_unit) {
+    if (index > jumlahUnit) {
+        return false;
+    }
+    if (data_unit[index].ID == pilihID_unit) {
+        if (data_unit[index].statusTersedia) {
+            data_unit[index].statusTersedia = false;
+            cout << "Unit " << pilihID_unit << endl;
+            cout << left << setw(17) << "Nama" << ": " << data_unit[index].nama << endl;
+            cout << left << setw(17) << "Tipe" << ": " << data_unit[index].tipe << endl;
+            cout << left << setw(17) << "Fasilitas" << ": " << data_unit[index].fasilitas << endl;
+            cout << left << setw(17) << "Lokasi" << ": " << data_unit[index].lokasi << endl;
+            cout << left << setw(17) << "Harga Perbulan" << ": " << data_unit[index].nama << endl;
+            cout << left << setw(17) << "Tersedia" << ": " << data_unit[index].statusTersedia << endl;
+
+
+        } else {
+            cout << "Unit " << pilihID_unit << " sudah disewa." << endl;
+        }
+        return true;
+    }
+    return cariUnit(index + 1, pilihID_unit);
 }
