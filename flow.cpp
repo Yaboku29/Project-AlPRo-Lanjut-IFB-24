@@ -7,7 +7,7 @@ using namespace std;
 // KUMPULAN STRUCT MASUKIN SINI
 //Struct untuk unit apartemen
 struct unit {
-    string ID;
+    int ID;
     string nama;
     string tipe;
     string lokasi;
@@ -290,8 +290,8 @@ void tampilkanDataApartemen() {
 
 void sewaUnit() {
     system("cls");
-    data_unit[1].ID="1";
-    string pilihID_unit;
+    data_unit[1].ID=1;
+    int pilihID_unit;
     tampilkanSemuaDataApartemen();
 
     cout << "Pilih ID unit yang ingin disewa: ";
@@ -304,6 +304,7 @@ void sewaUnit() {
         system("pause");
         sewaUnit(); 
     }
+    
 }
 
 void hitungTotalPendapatan() {
@@ -329,7 +330,7 @@ void tampilkanSemuaDataApartemen(){
     }
 }
 
-bool cariUnit(int index, string& pilihID_unit) {
+bool cariUnit(int index, int& pilihID_unit) {
     if (index > jumlahUnit) {
         return false;
     }
