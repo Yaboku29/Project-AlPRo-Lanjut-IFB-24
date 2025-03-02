@@ -26,7 +26,11 @@ struct akun_penyewa{
 
 // KUMPULAN DATA (UNIT, AKUN, ADMIN, ETC) MASUKIN SINI
 // data unit
-unit data_unit[301]; 
+unit data_unit[301]={
+    {0," "," "," "," ",0,true},
+    {1, "Apartemen A", "Studio", "Jakarta", "AC, TV, Kulkas, Kamar Mandi", 1000000, true},
+    
+}; 
 int jumlahUnit = 3;
 
 
@@ -35,7 +39,7 @@ akun_penyewa penyewa[1001];
 int akun=0;
 
 
-bool cariUnit(int index,string& pilihID_unit);
+bool cariUnit(int &index, int pilihID_unit);
 //Data Akun 
 void loginMenu();
 void signUpMenu();
@@ -291,18 +295,51 @@ void tampilkanDataApartemen() {
 void sewaUnit() {
     system("cls");
     data_unit[1].ID=1;
-    int pilihID_unit;
+    int pilihID_unit,JadiSewa;
+    int indexUnit=1;
     tampilkanSemuaDataApartemen();
 
     cout << "Pilih ID unit yang ingin disewa: ";
     cin >> pilihID_unit;
     system("cls");
 
-    if(cariUnit(1, pilihID_unit) == false) {
+    if(cariUnit(indexUnit, pilihID_unit) == false) {
         
         cout << "Unit dengan ID: " << pilihID_unit << " tidak tersedia.\nSilahkan pilih yang lain.\n";
         system("pause");
         sewaUnit(); 
+    } else {
+        
+            cout << "Unit " << pilihID_unit << endl;
+            cout << left << setw(17) << "Nama" << ": " << data_unit[indexUnit].nama << endl;
+            cout << left << setw(17) << "Tipe" << ": " << data_unit[indexUnit].tipe << endl;
+            cout << left << setw(17) << "Fasilitas" << ": " << data_unit[indexUnit].fasilitas << endl;
+            cout << left << setw(17) << "Lokasi" << ": " << data_unit[indexUnit].lokasi << endl;
+            cout << left << setw(17) << "Harga Perbulan" << ": Rp." << data_unit[indexUnit].hargaPerBulan << endl;
+            cout << left << setw(17) << "Tersedia" << ": " << (data_unit[indexUnit].statusTersedia) << endl;
+            do
+            {
+                cout << "Apakah Anda yakin ingin menyewa unit ini? (y/n): ";
+                cin >> JadiSewa;
+                if (!(JadiSewa=='y'||JadiSewa=='n')) {
+                    cout << "Masukkan input yang benar! (y/n)" << endl;
+                    system("pause");
+                }
+            } while (!(JadiSewa=='y'&&JadiSewa=='n'));
+            
+            if (JadiSewa=='y'){
+                // BELOM BIKIN VARIABEL BULAN MASUK & KELUAR
+                cout << "Masukkan Bulan masuk: ";
+                cout << "Masukkan Bulan keluar: ";
+
+                data_unit[indexUnit].statusTersedia=false;
+                cout << "Unit " << pilihID_unit << " berhasil disewa." << endl;
+                system("pause");
+                penyewaMenu();
+            } else {
+                sewaUnit();
+            }
+            
     }
     
 }
@@ -330,20 +367,14 @@ void tampilkanSemuaDataApartemen(){
     }
 }
 
-bool cariUnit(int index, int& pilihID_unit) {
+bool cariUnit(int &index, int pilihID_unit) {
     if (index > jumlahUnit) {
         return false;
     }
     if (data_unit[index].ID == pilihID_unit) {
         if (data_unit[index].statusTersedia) {
-            data_unit[index].statusTersedia = false;
-            cout << "Unit " << pilihID_unit << endl;
-            cout << left << setw(17) << "Nama" << ": " << data_unit[index].nama << endl;
-            cout << left << setw(17) << "Tipe" << ": " << data_unit[index].tipe << endl;
-            cout << left << setw(17) << "Fasilitas" << ": " << data_unit[index].fasilitas << endl;
-            cout << left << setw(17) << "Lokasi" << ": " << data_unit[index].lokasi << endl;
-            cout << left << setw(17) << "Harga Perbulan" << ": " << data_unit[index].nama << endl;
-            cout << left << setw(17) << "Tersedia" << ": " << data_unit[index].statusTersedia << endl;
+            cout << "Unit " << pilihID_unit << " tersedia." << endl;
+            
 
 
         } else {
@@ -351,5 +382,6 @@ bool cariUnit(int index, int& pilihID_unit) {
         }
         return true;
     }
-    return cariUnit(index + 1, pilihID_unit);
+    index++;
+    return cariUnit(index, pilihID_unit);
 }
