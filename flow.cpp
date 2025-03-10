@@ -28,15 +28,15 @@ struct akun_penyewa{
 // data unit
 unit data_unit[301]={
 
-    {"1", "Apartemen A", "Studio", "Jakarta", "AC, TV, Kulkas, Kamar Mandi", 1000000, true},
-    {"2", "Apartemen B", "Studio", "Jakarta", "Kolam Renang, Gym", 5000000, true},
-    {"3", "Apartemen C", "2BR", "Bandung", "Gym, Tempat Yoga", 7000000, false},
-    {"4", "Apartemen D", "1BR", "Surabaya", "Bioskop Pribadi", 6000000, true},
-    {"5", "Apartemen E", "3BR", "Jakarta", "Kolam Renang", 9000000, false},
-    {"6", "Apartemen F", "2BR", "Sleman", "Jasa Antar MBG, Akun Kaskus Premium", 1000000, false},
-    {"7", "Apartemen G", "Studio", "Surabaya", "-", 2000000, true},
-    {"8", "Apartemen H", "3BR", "Sleman", "-", 1500000, true},
-    {"9", "Apartemen I", "Loft", "Surabaya", "WiFi 6G (illegal), Jasa Antar Makanan", 2000000, true},
+    {1, "Apartemen A", "Studio", "Jakarta", "AC, TV, Kulkas, Kamar Mandi", 1000000, true},
+    {2, "Apartemen B", "Studio", "Jakarta", "Kolam Renang, Gym", 5000000, true},
+    {3, "Apartemen C", "2BR", "Bandung", "Gym, Tempat Yoga", 7000000, false},
+    {4, "Apartemen D", "1BR", "Surabaya", "Bioskop Pribadi", 6000000, true},
+    {5, "Apartemen E", "3BR", "Jakarta", "Kolam Renang", 9000000, false},
+    {6, "Apartemen F", "2BR", "Sleman", "Jasa Antar MBG, Akun Kaskus Premium", 1000000, false},
+    {7, "Apartemen G", "Studio", "Surabaya", "-", 2000000, true},
+    {8, "Apartemen H", "3BR", "Sleman", "-", 1500000, true},
+    {9, "Apartemen I", "Loft", "Surabaya", "WiFi 6G (illegal), Jasa Antar Makanan", 2000000, true},
     
     }; 
 int jumlahUnit = 9;
@@ -435,7 +435,7 @@ void cariDataApartemen(){
 }
 
 void cariIDapartemen(){
-    string cari;
+    int cari;
     cout << "Masukkan ID Apartemen yang ingin dicari : "; cin >> cari;
 
     //asumsi ID urut
