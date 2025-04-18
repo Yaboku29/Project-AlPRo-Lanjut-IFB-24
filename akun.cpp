@@ -1,5 +1,4 @@
 #include "akun.hpp"
-#include "Data_Apartment.hpp"
 
 void adminMenu(){
 

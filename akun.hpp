@@ -2,6 +2,7 @@
 #define AKUN_HPP
 
 #include <iostream>
+#include "Data_Apartment.hpp"
 using namespace std;
 
 void adminMenu();

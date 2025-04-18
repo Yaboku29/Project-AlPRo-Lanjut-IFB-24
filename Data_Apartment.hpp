@@ -1,6 +1,7 @@
 #ifndef DATA_APARTEMEN_HPP
 #define DATA_APARTEMEN_HPP
 #include <iostream>
+#include "Utilitas.hpp"
 using namespace std;
 
 struct unit {
