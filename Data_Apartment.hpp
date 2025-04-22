@@ -2,6 +2,8 @@
 #define DATA_APARTEMEN_HPP
 #include <iostream>
 #include "Utilitas.hpp"
+#include "json.hpp"
+
 using namespace std;
 
 struct unit {
