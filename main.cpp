@@ -1,6 +1,5 @@
 #include "akun.hpp"
 
-
 void menu();
 
 int main(){
