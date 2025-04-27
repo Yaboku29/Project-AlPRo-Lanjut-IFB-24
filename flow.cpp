@@ -74,7 +74,7 @@ void urutKecilBesar(unit data_unit[],int jmldata);
 void urutBesarKecil(unit data_unit[], int jmldata);
 
 int main() {
-    // loginMenu();
+    loginMenu();
     // return 0;
     tampilkanDataApartemen();
 }
@@ -333,7 +333,8 @@ void tampilkanDataApartemen() {
 void sewaUnit() {
     system("cls");
     data_unit[1].ID=1;
-    int pilihID_unit,JadiSewa;
+    int pilihID_unit;
+    char JadiSewa;
     int indexUnit=1;
     tampilkanSemuaDataApartemen();
 
@@ -347,8 +348,8 @@ void sewaUnit() {
         system("pause");
         sewaUnit(); 
     } else {
-        
-            cout << "Unit " << pilihID_unit << endl;
+            cin.ignore();
+            cout << "Unit " <<setfill(' ')<< pilihID_unit << endl;
             cout << left << setw(17) << "Nama" << ": " << data_unit[indexUnit].nama << endl;
             cout << left << setw(17) << "Tipe" << ": " << data_unit[indexUnit].tipe << endl;
             cout << left << setw(17) << "Fasilitas" << ": " << data_unit[indexUnit].fasilitas << endl;
@@ -359,19 +360,23 @@ void sewaUnit() {
             {
                 cout << "Apakah Anda yakin ingin menyewa unit ini? (y/n): ";
                 cin >> JadiSewa;
-                if (!(JadiSewa=='y'||JadiSewa=='n')) {
+                if (!(JadiSewa =='y' || JadiSewa =='n')) {
                     cout << "Masukkan input yang benar! (y/n)" << endl;
                     system("pause");
                 }
-            } while (!(JadiSewa=='y'&&JadiSewa=='n'));
+            } while (!(JadiSewa =='y' || JadiSewa =='n'));
             
             if (JadiSewa=='y'){
                 // BELOM BIKIN VARIABEL BULAN MASUK & KELUAR
-                cout << "Masukkan Bulan masuk: ";
-                cout << "Masukkan Bulan keluar: ";
+                cout << "Masukkan Bulan masuk: " << endl;
+                cout << "Masukkan Bulan keluar: " << endl;
 
                 data_unit[indexUnit].statusTersedia=false;
                 cout << "Unit " << pilihID_unit << " berhasil disewa." << endl;
+                cout << "Nama Penyewa\t: " << penyewa[akun].username << endl;
+                cout << "ID Penyewa\t: " << penyewa[akun].ID << endl;
+                cout << "Total Harga\t: Rp." << data_unit[indexUnit].hargaPerBulan /* dikali jumlah bulan */<< endl;
+                cout << "Silahkan melakukan pembayaran ke admin." << endl;
                 system("pause");
                 penyewaMenu();
             } else {
