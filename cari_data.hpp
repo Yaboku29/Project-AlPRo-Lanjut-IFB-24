@@ -1,7 +1,6 @@
 #ifndef CARI_DATA_HPP
 #define CARI_DATA_HPP
 
-#include <iostream>
 #include "Data_Apartment.hpp"
 
 void cariDataApartemen();

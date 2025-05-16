@@ -1,5 +1,5 @@
 #include "Data_Apartment.hpp"
-
+using namespace std;
 void tampilkanSemuaDataApartemen(){
     clearScreen();
 }

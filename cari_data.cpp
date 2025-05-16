@@ -1,5 +1,5 @@
 #include "cari_data.hpp"
-
+using namespace std;
 void cariDataApartemen(){
     clearScreen();
 }

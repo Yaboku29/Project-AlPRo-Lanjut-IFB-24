@@ -3,8 +3,10 @@
 #include <iostream>
 #include "Utilitas.hpp"
 #include "json.hpp"
-
-using namespace std;
+#include <fstream>
+#include <string>
+#include <iterator>
+#include <algorithm>
 
 struct unit {
     int ID;
