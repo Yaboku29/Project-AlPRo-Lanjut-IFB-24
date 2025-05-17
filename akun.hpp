@@ -1,6 +1,7 @@
 #ifndef AKUN_HPP
 #define AKUN_HPP
-#include "Data_Apartment.hpp"
+#include <iostream>
+#include <fstream>
 
 struct akun_penyewa{
     int ID;
@@ -8,6 +9,7 @@ struct akun_penyewa{
     string password;
     string email;
 };
+void tambahAkun(const akun_penyewa &akunBaru);
 void bacaJumlahAkun();
 void adminMenu();
 void signInPenyewa();

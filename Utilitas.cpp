@@ -1,4 +1,5 @@
 #include "Utilitas.hpp"
+#include <string>
 
 using namespace std;
 
