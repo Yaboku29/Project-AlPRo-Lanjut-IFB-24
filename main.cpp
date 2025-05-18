@@ -1,5 +1,6 @@
 #include "akun.hpp"
-
+#include "Utilitas.hpp"
+using namespace std;
 void menu();
 
 int main(){
@@ -20,9 +21,14 @@ void menu(){
     switch (pilihan) {
         case 1:
             adminMenu();
+            cin.ignore();
+            system("pause");
             break;
         case 2:
             signInPenyewa();
+            cin.ignore();
+            system("pause");
+            menu();
             break;
         case 3:
             cout << "Terima kasih telah menggunakan sistem ini." << endl;
@@ -30,6 +36,8 @@ void menu(){
             break;
         default:
             cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+            cin.ignore();
+            system("pause");
             menu();
     }
 }

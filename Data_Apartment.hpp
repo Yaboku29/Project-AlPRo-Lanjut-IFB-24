@@ -1,8 +1,8 @@
 #ifndef DATA_APARTEMEN_HPP
 #define DATA_APARTEMEN_HPP
 #include <iostream>
-#include "Utilitas.hpp"
-using namespace std;
+#include "json.hpp"
+#include <fstream>
 
 struct unit {
     int ID;
@@ -22,15 +22,6 @@ void kelolaDataApartemen();
 void tambahDataApartemen(); 
 void hapusDataApartemen(); 
 void ubahStatusApartemen();
-
-void cariDataApartemen();
-void cariIDapartemen();
-void cariTipeApartemen();
-void cariHargaApartemen();
-void cariRangeHargaApartemen();
-void cariKetersediaanApartemen();
-void urutKecilBesar(unit data_unit[],int jmldata);
-void urutBesarKecil(unit data_unit[], int jmldata);
 
 
 #endif
