@@ -22,6 +22,7 @@ void kelolaDataApartemen();
 void tambahDataApartemen(); 
 void hapusDataApartemen(); 
 void ubahStatusApartemen();
+bool cariUnit(int &index, int pilihID_unit);
 
 
 #endif
