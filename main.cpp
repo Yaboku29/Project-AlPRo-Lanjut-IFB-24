@@ -1,9 +1,11 @@
 #include "akun.hpp"
 #include "Utilitas.hpp"
+#include "Data_Apartment.hpp"
 using namespace std;
 void menu();
 
 int main(){
+    muatDataUnitDariFile("Data_Unit.txt");
     menu();
 }
 

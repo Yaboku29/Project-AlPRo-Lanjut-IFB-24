@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <algorithm> //utk fungsi swap, utk mbantu sorting (udh itu aja si, cuma utk fungsi bawaan swap ajh)
 using namespace std;
 
 
@@ -598,34 +599,60 @@ void cariKetersediaanApartemen(){
 }
 
 void urutKecilBesar(unit data_unit[], int jmldata){
+    //metode straight selection sort
     for (int i = 0; i < jmldata; i++)
     {
+        int min = i; 
         for (int j = i + 1; j < jmldata; j++)
         {
             if (data_unit[j].hargaPerBulan < data_unit[i].hargaPerBulan)
             {
-               int temp = data_unit[i].hargaPerBulan;
-               data_unit[i].hargaPerBulan = data_unit[j].hargaPerBulan;
-               data_unit[j].hargaPerBulan = temp;
+               min = j;
             }   
         }
+
+        if (min != i) //klo dari awal index plg kecil = i, g usah diswap
+        {
+            //pake fungsi bawaan SWAP dari library algorithm (#include <algorithm>)
+            swap(data_unit[i].ID, data_unit[min].ID);
+            swap(data_unit[i].nama, data_unit[min].nama);
+            swap(data_unit[i].tipe, data_unit[min].tipe);
+            swap(data_unit[i].lokasi, data_unit[min].lokasi);
+            swap(data_unit[i].fasilitas, data_unit[min].fasilitas);
+            swap(data_unit[i].hargaPerBulan, data_unit[min].hargaPerBulan);
+            swap(data_unit[i].statusTersedia, data_unit[min].statusTersedia);
+        }
+        
     }
     
     tampilkanSemuaDataApartemen(); 
 }
 
 void urutBesarKecil(unit data_unit[], int jmldata){
+    //metode straight selection sort
     for (int i = 0; i < jmldata; i++)
     {
-        for (int j = i + 1; j < jmldata; j++)
+        int max = i; 
+        for (int j = i + 1; j > jmldata; j++)
         {
             if (data_unit[j].hargaPerBulan > data_unit[i].hargaPerBulan)
             {
-               int temp = data_unit[i].hargaPerBulan;
-               data_unit[i].hargaPerBulan = data_unit[j].hargaPerBulan;
-               data_unit[j].hargaPerBulan = temp;
+               max = j;
             }   
         }
+
+        if (max != i) //klo dari awal index plg gedhe = i, g usah diswap
+        {
+            //pake fungsi bawaan SWAP dari library algorithm (#include <algorithm>)
+            swap(data_unit[i].ID, data_unit[max].ID);
+            swap(data_unit[i].nama, data_unit[max].nama);
+            swap(data_unit[i].tipe, data_unit[max].tipe);
+            swap(data_unit[i].lokasi, data_unit[max].lokasi);
+            swap(data_unit[i].fasilitas, data_unit[max].fasilitas);
+            swap(data_unit[i].hargaPerBulan, data_unit[max].hargaPerBulan);
+            swap(data_unit[i].statusTersedia, data_unit[max].statusTersedia);
+        }
+        
     }
     
     tampilkanSemuaDataApartemen();

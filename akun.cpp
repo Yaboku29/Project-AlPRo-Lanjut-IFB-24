@@ -124,7 +124,7 @@ void signInPenyewa(){
             if (ditemukan) {
                 cout << BOLD << GREEN << "Login berhasil! Selamat datang, " << akunLogin.username << RESET << endl;
                 system("pause");
-                Penyewa_Menu(); // Pindah ke menu penyewa
+                Penyewa_Menu(akunLogin.ID); // Pindah ke menu penyewa
             } else {
                 cout << RED << "Username atau Password salah!" << RESET << endl;
                 system("pause");
@@ -163,6 +163,11 @@ void sign_up(){
     system("pause");
     signInPenyewa();
 }
-void Penyewa_Menu(){
+void Penyewa_Menu(int ID){
+    akun_penyewa penyewaAkun={
+        1, "Ariz", "Ariz", "Ariz@gmail.com"
+    };
+    int id=penyewaAkun.ID;
     clearScreen();
+    sewaUnit(penyewaAkun,id);
 }

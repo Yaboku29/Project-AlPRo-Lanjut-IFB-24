@@ -15,6 +15,6 @@ void bacaJumlahAkun();
 void adminMenu();
 void signInPenyewa();
 void sign_up();
-void Penyewa_Menu();
+void Penyewa_Menu(int ID);
 
 #endif

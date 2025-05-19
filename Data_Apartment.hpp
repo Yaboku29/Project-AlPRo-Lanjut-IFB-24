@@ -16,14 +16,16 @@ struct unit {
     bool statusTersedia=true;
 };
 
-void tampilkanSemuaDataApartemen();
+void muatDataUnitDariFile(const string& namaFile);
+//void tampilkanSemuaDataApartemen();
 void tampilkanDataApartemen(); 
-void sewaUnit(const akun_penyewa &penyewa); 
+void sewaUnit(const akun_penyewa &penyewa,int ID); 
 void hitungTotalPendapatan();
 void kelolaDataApartemen();
 void tambahDataApartemen(); 
 void hapusDataApartemen(); 
 void ubahStatusApartemen();
+void simpanDataUnit();
 bool cariUnit(int &index, int pilihID_unit);
 
 
