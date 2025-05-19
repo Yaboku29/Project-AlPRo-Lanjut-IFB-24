@@ -10,6 +10,12 @@ void tambahAkun(const akun_penyewa &akunBaru){
         cout<<"Database Tidak DITEMUKAN.\n";
         return;
     }
+    DatabaseAkunPenyewa << akunBaru.ID << ';'
+                        << akunBaru.username << ';'
+                        << akunBaru.password << ';'
+                        << akunBaru.email << '\n';
+
+    DatabaseAkunPenyewa.close();
 }
 
 void bacaJumlahAkun(){
@@ -64,6 +70,77 @@ void adminMenu(){
 }
 void signInPenyewa(){
     clearScreen();
+    ifstream fileAkun("dataAkunPenyewa.txt");
+    string usn_signIn, pass_signIn;
+    int pilih;
+    akun_penyewa akunLogin;
+    string line;
+    bool ditemukan = false;
+    cout << "=== LOGIN PENYEWA ===" << endl;
+    cout << "1. Sign In" << endl;
+    cout << "2. Sign Up" << endl;
+    cout << "3. Kembali ke Menu Login" << endl;
+    cout << "Pilihan: ";
+    cin >> pilih;
+   
+
+    switch (pilih)
+    {
+    case 1:
+        
+         clearScreen();
+            cout << "===== Sign In =====\n\n";
+            cout << "Username: ";
+            cin.ignore();
+            getline(cin, usn_signIn);
+            cout << "Password: ";
+            getline(cin, pass_signIn);
+
+            if (!fileAkun.is_open()) {
+                cout << "Tidak bisa membuka file\n";
+                system("pause");
+                return;
+            }
+
+            while (getline(fileAkun, line)) {
+                if (line.empty()) continue;
+
+                stringstream ss(line);
+                string ID_str;
+                getline(ss, ID_str, ';');
+                getline(ss, akunLogin.username, ';');
+                getline(ss, akunLogin.password, ';');
+                getline(ss, akunLogin.email, ';');
+
+                if (akunLogin.username == usn_signIn && akunLogin.password == pass_signIn) {
+                    akunLogin.ID = stoi(ID_str);
+                    ditemukan = true;
+                    break;
+                }
+            }
+
+            fileAkun.close();
+
+            if (ditemukan) {
+                cout << BOLD << GREEN << "Login berhasil! Selamat datang, " << akunLogin.username << RESET << endl;
+                system("pause");
+                Penyewa_Menu(); // Pindah ke menu penyewa
+            } else {
+                cout << RED << "Username atau Password salah!" << RESET << endl;
+                system("pause");
+                signInPenyewa(); // Kembali login
+            }
+
+        break;
+    case 2:
+        sign_up();
+        break;
+    default:
+        break;
+    }
+    
+
+    
 }
 void sign_up(){
     clearScreen();
