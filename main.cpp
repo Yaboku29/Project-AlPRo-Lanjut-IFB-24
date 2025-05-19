@@ -23,6 +23,7 @@ void menu(){
             adminMenu();
             cin.ignore();
             system("pause");
+            menu();
             break;
         case 2:
             signInPenyewa();

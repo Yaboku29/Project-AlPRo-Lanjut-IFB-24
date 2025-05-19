@@ -1,4 +1,5 @@
 #include "akun.hpp"
+#include "Data_Apartment.hpp"
 #include "Utilitas.hpp"
 using namespace std;
 int akun=0;
@@ -54,7 +55,7 @@ void adminMenu(){
             hitungTotalPendapatan();
             break;
         case 4:
-            loginMenu();
+            
             break;
         default:
             cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
