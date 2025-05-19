@@ -1,7 +1,9 @@
 #include "Data_Apartment.hpp"
 #include "akun.hpp"
 #include "Utilitas.hpp"
+#include <fstream>
 using namespace std;
+
 
 unit data_unit[301]={
 
@@ -25,7 +27,7 @@ void tampilkanSemuaDataApartemen(){
 void tampilkanDataApartemen(){
     clearScreen();
 }
-void sewaUnit(){
+void sewaUnit(akun_penyewa penyewa){
     clearScreen();
     data_unit[1].ID=1;
     int pilihID_unit;
@@ -68,8 +70,8 @@ void sewaUnit(){
 
                 data_unit[indexUnit].statusTersedia=false;
                 cout << "Unit " << pilihID_unit << " berhasil disewa." << endl;
-                cout << "Nama Penyewa\t: " << penyewa[akun].username << endl;
-                cout << "ID Penyewa\t: " << penyewa[akun].ID << endl;
+                cout << "Nama Penyewa\t: " << penyewa.username << endl;
+                cout << "ID Penyewa\t: " << penyewa.ID << endl;
                 cout << "Total Harga\t: Rp." << data_unit[indexUnit].hargaPerBulan /* dikali jumlah bulan */<< endl;
                 cout << "Silahkan melakukan pembayaran ke admin." << endl;
                 system("pause");
