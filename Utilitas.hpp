@@ -2,7 +2,7 @@
 #define UTILITAS_HPP
 
 #include <iostream>
-
+using namespace std;
 
 // ANSI Escape Codes untuk warna teks
 #define RESET   "\033[0m"

@@ -1,7 +1,7 @@
 #include "akun.hpp"
 #include "Data_Apartment.hpp"
 #include "Utilitas.hpp"
-using namespace std;
+
 int akun=0;
 
 void tambahAkun(const akun_penyewa &akunBaru){

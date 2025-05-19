@@ -1,7 +1,6 @@
 #include "Utilitas.hpp"
 #include <string>
 
-using namespace std;
 
 void tampilkanHeader(){
     cout<<CYAN<<BOLD;

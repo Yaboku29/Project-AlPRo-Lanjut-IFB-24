@@ -1,8 +1,6 @@
 #include "Data_Apartment.hpp"
-#include "akun.hpp"
 #include "Utilitas.hpp"
 #include <fstream>
-using namespace std;
 
 
 unit data_unit[301]={
@@ -27,7 +25,7 @@ void tampilkanSemuaDataApartemen(){
 void tampilkanDataApartemen(){
     clearScreen();
 }
-void sewaUnit(akun_penyewa penyewa){
+void sewaUnit(const akun_penyewa &penyewa){
     clearScreen();
     data_unit[1].ID=1;
     int pilihID_unit;
@@ -43,7 +41,7 @@ void sewaUnit(akun_penyewa penyewa){
         
         cout << "Unit dengan ID: " << pilihID_unit << " tidak tersedia.\nSilahkan pilih yang lain.\n";
         system("pause");
-        sewaUnit(); 
+        sewaUnit(penyewa); 
     } else {
             cin.ignore();
             cout << "Unit " <<setfill(' ')<< pilihID_unit << endl;
@@ -77,7 +75,7 @@ void sewaUnit(akun_penyewa penyewa){
                 system("pause");
                 Penyewa_Menu();
             } else {
-                sewaUnit();
+                sewaUnit(penyewa);
             }
             
     }

@@ -1,9 +1,11 @@
 #ifndef DATA_APARTEMEN_HPP
 #define DATA_APARTEMEN_HPP
 #include <iostream>
+#include <string>
 #include "json.hpp"
 #include <fstream>
-
+#include "akun.hpp"
+using namespace std;
 struct unit {
     int ID;
     string nama;
@@ -16,7 +18,7 @@ struct unit {
 
 void tampilkanSemuaDataApartemen();
 void tampilkanDataApartemen(); 
-void sewaUnit(); 
+void sewaUnit(const akun_penyewa &penyewa); 
 void hitungTotalPendapatan();
 void kelolaDataApartemen();
 void tambahDataApartemen(); 
