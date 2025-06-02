@@ -4,12 +4,22 @@
 #include <string>
 #include <fstream>
 using namespace std;
+
 struct akun_penyewa{
     int ID;
     string username;
     string password;
     string email;
 };
+
+struct akun_admin{
+    string username;
+    string password;
+};
+
+extern akun_admin admin_data[]; // deklarasi, bukan definisi!
+
+
 void tambahAkun(const akun_penyewa &akunBaru);
 void bacaJumlahAkun();
 void adminMenu();

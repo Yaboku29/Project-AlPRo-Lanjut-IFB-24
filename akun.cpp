@@ -1,7 +1,15 @@
 #include "akun.hpp"
-#include "Data_Apartment.hpp"
+#include "cari_data.hpp"
 #include "Utilitas.hpp"
+using namespace std;
 
+akun_admin admin_data[] = {
+    {"Ariz","123240070"},
+    {"Lintang","123240065"},
+    {"Yasmine","123240064"},
+    {"Shafiq",""},
+    {"Rayhan",""},
+};
 int akun=0;
 
 void tambahAkun(const akun_penyewa &akunBaru){
@@ -36,6 +44,30 @@ void bacaJumlahAkun(){
 
 
 void adminMenu(){
+    string usn, pass;
+    bool found = false;
+    system("cls");
+    cout << BOLD << BLUE <<"<======= Silahkan login dahulu =======>\n\n";
+    cout << "Username: ";
+    cin >> usn;
+    cout << "Password: ";
+    cin >> pass;
+
+    for(int i=0; i<5; i++){
+        if(usn == admin_data[i].username && pass == admin_data[i].password){
+            cout << BOLD << GREEN << "Login berhasil! Selamat datang, " << usn << RESET << endl;
+            system("pause");
+            clearScreen();
+            found = true;
+            break;
+        }
+    }
+
+    if(!found){
+        cout << RED << "Username atau Password salah!" << RESET << endl;
+        system("pause");
+        return;
+    }
     int pilihan;
     system("cls");
 
