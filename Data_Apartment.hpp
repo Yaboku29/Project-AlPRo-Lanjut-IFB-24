@@ -27,6 +27,7 @@ void hapusDataApartemen();
 void ubahStatusApartemen();
 void simpanDataUnit();
 bool cariUnit(int &index, int pilihID_unit);
+void simpanPenyewaan(int idUnit, int idPenyewa, int bulanMasuk, int bulanKeluar, int totalHarga);
 
-
+extern unit data_unit[301];
 #endif

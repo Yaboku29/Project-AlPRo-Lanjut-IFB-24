@@ -30,10 +30,11 @@ void bacaJumlahAkun(){
     ifstream DatabaseAkunPenyewa("dataAkunPenyewa.txt");
     if(!DatabaseAkunPenyewa.is_open()){
         cout<<"Database Tidak DITEMUKAN.\n";
+        akun = 0;
         return;
     }
     string baris;
-    int jumlahBaris;
+    int jumlahBaris = 0;
     while(getline(DatabaseAkunPenyewa,baris)){
         if(!baris.empty()) jumlahBaris++;
     }
@@ -57,7 +58,6 @@ void adminMenu(){
         if(usn == admin_data[i].username && pass == admin_data[i].password){
             cout << BOLD << GREEN << "Login berhasil! Selamat datang, " << usn << RESET << endl;
             system("pause");
-            clearScreen();
             found = true;
             break;
         }
@@ -69,137 +69,193 @@ void adminMenu(){
         return;
     }
     int pilihan;
-    system("cls");
-
-    cout << "=== MENU ADMIN ===" << endl;
-    cout << "1. Kelola Data Apartemen (Tambah/Hapus/Edit Status)" << endl;
-    cout << "2. Tampilkan Data Apartemen" << endl;
-    cout << "3. Cek Total Pendapatan Bulanan" << endl;
-    cout << "4. Kembali ke Menu Login" << endl;
-    cout << "Pilihan: ";
-    cin >> pilihan;
-
-    switch (pilihan) {
-        case 1:
-            kelolaDataApartemen(); // Pindah ke menu kelola data apartemen
-            break;
-        case 2:
-            tampilkanDataApartemen(); // Contoh pemanggilan fungsi
-            break;
-        case 3:
-            int bulan;
-            cout << "Masukkan bulan (1-12): ";
-            cin >> bulan;
-            hitungTotalPendapatan();
-            break;
-        case 4:
-            
-            break;
-        default:
-            cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
-            adminMenu();
-    }
+    do{
+        clearScreen();
+        cout << BOLD << BLUE << "=== MENU ADMIN ===" << RESET << endl;
+        cout << "1. Kelola Data Apartemen (Tambah/Hapus/Edit Status)" << endl;
+        cout << "2. Tampilkan Data Apartemen" << endl;
+        cout << "3. Cek Total Pendapatan Bulanan" << endl;
+        cout << "4. Logout" << endl;
+        cout << "Pilihan: ";
+        cin >> pilihan;
+        if(cin.fail()){
+            cin.clear(); cin.ignore(1000,'\n');
+            cout << RED << "Input tidak valid!" << RESET << endl;
+            system("pause");
+            continue;
+        }
+        switch (pilihan) {
+            case 1:
+                kelolaDataApartemen();
+                break;
+            case 2:
+                tampilkanDataApartemen();
+                system("pause");
+                break;
+            case 3:
+                hitungTotalPendapatan();
+                break;
+            case 4:
+                cout << "Logout...\n";
+                system("pause");
+                return;
+                break;
+            default:
+                cout << RED << "Pilihan tidak valid. Silakan coba lagi." << RESET << endl;
+                system("pause");
+                break;
+        }
+    } while (pilihan != 4);
 }
+
 void signInPenyewa(){
     clearScreen();
-    ifstream fileAkun("dataAkunPenyewa.txt");
-    string usn_signIn, pass_signIn;
     int pilih;
-    akun_penyewa akunLogin;
-    string line;
-    bool ditemukan = false;
     cout << "=== LOGIN PENYEWA ===" << endl;
     cout << "1. Sign In" << endl;
     cout << "2. Sign Up" << endl;
     cout << "3. Kembali ke Menu Login" << endl;
     cout << "Pilihan: ";
     cin >> pilih;
-   
-
+    if(cin.fail()){
+        cin.clear(); cin.ignore(1000,'\n');
+        cout << RED << "Input tidak valid!" << RESET << endl;
+        system("pause");
+        return;
+    }
     switch (pilih)
     {
-    case 1:
-        
-         clearScreen();
-            cout << "===== Sign In =====\n\n";
-            cout << "Username: ";
-            cin.ignore();
-            getline(cin, usn_signIn);
-            cout << "Password: ";
-            getline(cin, pass_signIn);
-
-            if (!fileAkun.is_open()) {
-                cout << "Tidak bisa membuka file\n";
-                system("pause");
-                return;
+    case 1:{
+        clearScreen();
+        string usn_signIn, pass_signIn;
+        cout << "===== Sign In =====\n\n";
+        cout << "Username: ";
+        cin.ignore();
+        getline(cin, usn_signIn);
+        cout << "Password: ";
+        getline(cin, pass_signIn);
+        ifstream fileAkun("dataAkunPenyewa.txt");
+        if (!fileAkun.is_open()) {
+            cout << "Tidak bisa membuka file\n";
+            system("pause");
+            return;
+        }
+        akun_penyewa akunLogin;
+        string line;
+        bool ditemukan = false;
+        while (getline(fileAkun, line)) {
+            if (line.empty()) continue;
+            stringstream ss(line);
+            string ID_str;
+            getline(ss, ID_str, ';');
+            getline(ss, akunLogin.username, ';');
+            getline(ss, akunLogin.password, ';');
+            getline(ss, akunLogin.email, ';');
+            if (strcasecmp(akunLogin.username.c_str(), usn_signIn.c_str()) == 0 && akunLogin.password == pass_signIn) {
+                akunLogin.ID = stoi(ID_str);
+                ditemukan = true;
+                break;
             }
-
-            while (getline(fileAkun, line)) {
-                if (line.empty()) continue;
-
-                stringstream ss(line);
-                string ID_str;
-                getline(ss, ID_str, ';');
-                getline(ss, akunLogin.username, ';');
-                getline(ss, akunLogin.password, ';');
-                getline(ss, akunLogin.email, ';');
-
-                if (akunLogin.username == usn_signIn && akunLogin.password == pass_signIn) {
-                    akunLogin.ID = stoi(ID_str);
-                    ditemukan = true;
-                    break;
-                }
-            }
-
-            fileAkun.close();
-
-            if (ditemukan) {
-                cout << BOLD << GREEN << "Login berhasil! Selamat datang, " << akunLogin.username << RESET << endl;
-                system("pause");
-                Penyewa_Menu(akunLogin.ID); // Pindah ke menu penyewa
-            } else {
-                cout << RED << "Username atau Password salah!" << RESET << endl;
-                system("pause");
-                signInPenyewa(); // Kembali login
-            }
-
-        break;
+        }
+        fileAkun.close();
+        if (ditemukan) {
+            cout << BOLD << GREEN << "Login berhasil! Selamat datang, " << akunLogin.username << RESET << endl;
+            system("pause");
+            Penyewa_Menu(akunLogin.ID);
+        } else {
+            cout << RED << "Username atau Password salah!" << RESET << endl;
+            system("pause");
+        }
+        break;}
     case 2:
         sign_up();
         break;
     default:
         break;
     }
-    
-
-    
 }
+
 void sign_up(){
     clearScreen();
     akun_penyewa akunBaru;
-    //Hitung=========
     bacaJumlahAkun();
     cout<<BLUE<<"Masukkan Email: ";
     cin>>akunBaru.email;
     cin.ignore();
     cout<<BLUE<<"Masukkan Username: ";
-    cin>>akunBaru.username;
-    cin.ignore();
+    getline(cin, akunBaru.username);
     cout<<BLUE<<"Masukkan Password: ";
-    cin>>akunBaru.password;
+    getline(cin, akunBaru.password);
     akunBaru.ID=akun+1;
     tambahAkun(akunBaru);
     cout<<BOLD<<GREEN<<"SELAMAT AKUN ANDA SUDAH TERDAFTAR"<<RESET<<endl;
     cout<<"Silakan sign-in dengan akun anda"<<endl;
-    cin.ignore();
     system("pause");
     signInPenyewa();
 }
+
 void Penyewa_Menu(int ID){
-    akun_penyewa penyewaAkun={
-        1, "Ariz", "Ariz", "Ariz@gmail.com"
-    };
-    int id=penyewaAkun.ID;
-    clearScreen();
-    sewaUnit(penyewaAkun,id);
+    akun_penyewa penyewaAkun;
+    ifstream fileAkun("dataAkunPenyewa.txt");
+    string line;
+    bool ditemukan = false;
+    while(getline(fileAkun, line)){
+        if(line.empty()) continue;
+        stringstream ss(line);
+        string ID_str;
+        getline(ss, ID_str, ';');
+        getline(ss, penyewaAkun.username, ';');
+        getline(ss, penyewaAkun.password, ';');
+        getline(ss, penyewaAkun.email, ';');
+        if(stoi(ID_str) == ID){
+            penyewaAkun.ID = ID;
+            ditemukan = true;
+            break;
+        }
+    }
+    fileAkun.close();
+    if(!ditemukan){
+        cout << "Data penyewa tidak ditemukan!\n";
+        system("pause");
+        return;
+    }
+    int pilihan;
+    do {
+        clearScreen();
+        cout << "=== MENU PENYEWA ===" << endl;
+        cout << "1. Sewa Unit Apartemen" << endl;
+        cout << "2. Cari Data Apartemen" << endl;
+        cout << "3. Logout" << endl;
+        cout << "Pilihan: ";
+        cin >> pilihan;
+        if(cin.fail()){
+            cin.clear(); cin.ignore(1000,'\n');
+            cout << RED << "Input tidak valid!" << RESET << endl;
+            system("pause");
+            continue;
+        }
+        switch(pilihan){
+            case 1:
+                sewaUnit(penyewaAkun, penyewaAkun.ID);
+                break;
+            case 2:
+                cariDataApartemen();
+                system("pause");
+                break;
+            case 3:
+                cout << "Logout...\n";
+                system("pause");
+                break;
+            default:
+                cout << "Pilihan tidak valid.\n";
+                system("pause");
+        }
+    } while(pilihan != 3);
 }
+
+#ifdef _WIN32
+#include <cstring>
+int strcasecmp(const char* s1, const char* s2) {
+    return _stricmp(s1, s2);
+}
+#endif
