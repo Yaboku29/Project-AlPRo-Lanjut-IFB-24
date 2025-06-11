@@ -7,8 +7,8 @@ akun_admin admin_data[] = {
     {"Ariz","123240070"},
     {"Lintang","123240065"},
     {"Yasmine","123240064"},
-    {"Shafiq",""},
-    {"Rayhan",""},
+    {"Shafiq","123240085"},
+    {"Rayhan","123240054"},
 };
 int akun=0;
 
@@ -48,7 +48,7 @@ void adminMenu(){
     string usn, pass;
     bool found = false;
     system("cls");
-    cout << BOLD << BLUE <<"<======= Silahkan login dahulu =======>\n\n";
+    cout << BOLD << YELLOW <<"<======= Silahkan login dahulu =======>\n\n";
     cout << "Username: ";
     cin >> usn;
     cout << "Password: ";

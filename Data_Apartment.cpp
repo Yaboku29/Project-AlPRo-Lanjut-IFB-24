@@ -189,7 +189,8 @@ void kelolaDataApartemen(){
     clearScreen();
     int pilihan;
     do
-    {
+    {   
+    clearScreen();
         cout << "=== KELOLA DATA APARTEMEN ===" << endl;
         cout << "1. Tambah Data Apartemen" << endl;
         cout << "2. Hapus Data Apartemen" << endl;
@@ -230,6 +231,7 @@ void tambahDataApartemen(){
         }
     }
     newUnit.ID = autoID;
+    clearScreen();
     cout << "=== Tambah Data Apartemen ===" << endl;
     cout << "ID (otomatis): " << newUnit.ID << endl;
     cin.ignore();

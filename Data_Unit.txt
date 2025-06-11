@@ -7,6 +7,5 @@
 7;Apartemen G;Studio;Surabaya;-;2000000;1
 8;Apartemen H;3BR;Sleman;-;1500000;1
 9;Apartemen I;Loft;Surabaya;WiFi 6G, Jasa Antar Makanan;2000000;1
-10;Exclusive Unit;SSR;Tambak Bayan;Kolam renang pribadi, konser privat Sal Priadi;12;1
-11;Bananini;Mussolini;Brr Brr Patapim;Cimpanzini Bananini;500;1
 12;Punya Sapiq;Sapiq 03;Depan Rumah Sapiq;Sapiq service 24 jam;900000;1
+13;Sapiq Room;A4;Lantai 2;Sapiq full service;1200000;1
